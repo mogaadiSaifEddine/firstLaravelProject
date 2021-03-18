@@ -1,12 +1,7 @@
 @extends('layout.app')
-@section('content')
-    
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{$title}}</title>
-
+       
+@section ('content')
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -21,7 +16,7 @@
             }
         </style>
     </head>
-    
+
         <h1>{{$first}}</h1>
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
@@ -130,4 +125,5 @@
                 </div>
             </div>
         </div>
-   @endsection
+@endsection    
+

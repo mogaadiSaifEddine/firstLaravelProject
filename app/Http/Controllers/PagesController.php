@@ -8,9 +8,12 @@ class PagesController extends Controller
 {
     //
     public function index() {
-        $title  = "Lsapp";
         $first = "Test : first app Laravel        " ;
-        return view ('pages.index',compact('title','first'));
+        return view ('pages.index',compact('first'));
+    }
+    public function app (){
+        $title = 'Lsapp'; 
+        return view ('layout.app' , compact ('title'));
     }
     public function about (){
         $welcome = 'WELCOME TO THE : 
