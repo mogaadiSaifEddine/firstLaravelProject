@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html>
-<body>
-    <h1>WELCOME TO THE :</h1>
+@extends('layout.app')
+@section('content')
+    <h1><?php echo $welcome; ?></h1>
 
-<h3> the about section </h3>
-</body>
-
-
-
-
-</html>
+@endsection

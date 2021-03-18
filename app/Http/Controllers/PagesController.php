@@ -8,15 +8,23 @@ class PagesController extends Controller
 {
     //
     public function index() {
-        return view ('pages.index');
+        $title  = "Lsapp";
+        $first = "Test : first app Laravel        " ;
+        return view ('pages.index',compact('title','first'));
     }
     public function about (){
-        return view ('pages.about');
+        $welcome = 'WELCOME TO THE : 
+        about section';
+        return view ('pages.about' , compact ('welcome'));
     } 
 
 
-    public function services (){;
-        return view ('pages.services');
+    public function services (){
+        $data = array(
+            'title'=>'services' , 
+        'services'=>['Laravel ' , 'express' , 'php' , 'node']
+        );
+        return view ('pages.services')->with($data);
     }
     
 }
