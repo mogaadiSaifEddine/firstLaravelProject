@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 use App\Models\Post ;
 // use SQL
 //use DB ;
@@ -80,6 +81,9 @@ class PostsController extends Controller
     public function edit($id)
     {
         //
+        $post = Post::find($id);
+        return view ('posts.edit' ,['post'=>$post]);
+
     }
 
     /**
@@ -91,6 +95,28 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
+       
+     $post = Post::find($id);
+    
+      $msg ='post  '. $post->title;
+      $message = $msg ;
+     if ($request->title != null){
+      $msg.=' title updated from('.strtoupper($post->title).' )to ('.strtoupper($request->title ).')';
+      $post->title = $request->input('title');} 
+  
+     if ($request->body != null){
+
+     $post->body =$request->input('body');
+    $msg.='      body updated from (  '.strtoupper($post->body).'  ) to ( '.strtoupper($request->body).')';}
+    
+     $post->save();
+
+
+        if ($msg!=$message){
+     return redirect('/posts')->with('success',$msg);}
+     else{
+        return redirect('/posts')->with('error',$post->title.'    did not updated');
+     }
         //
     }
 
@@ -102,6 +128,10 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
+        $post=Post::find($id);
+        $title=$post->title ;
+        $post->delete();
+        return redirect('/posts' )->with('success' , $title.'  deleted');
         //
     }
 }
