@@ -10,8 +10,10 @@
    </head>
 <body>
     @include('Inc.navBar')
-    <div class = 'container'>
+    <div class = 'container'> 
+          @include('Inc.messages')
         @yield('content')
+     
     </div>
 </body>
 

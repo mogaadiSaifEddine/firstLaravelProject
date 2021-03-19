@@ -15,8 +15,14 @@
         <li class="nav-item">
             <a class="nav-link" href="/about">about</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/posts">Posts</a>
+          </li>
        
       </ul>
-     
+      <ul class="nav navbar-nav right">
+      <li class="nav-item">
+        <a class="nav-link" href="/posts/create">create a new post</a>
+      </li>
     </div>
   </nav>
