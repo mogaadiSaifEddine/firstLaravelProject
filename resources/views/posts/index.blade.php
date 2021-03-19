@@ -5,9 +5,9 @@
 
     @foreach ($posts as $post)
                 <div class="well">
+                  
                     <h3><a href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
-                    
-                    <small>created on {{$post->created_at}}</small>
+                    <small>created on {{$post->created_at}} by {{strtoupper(substr($post->user->name,0,1)).substr($post->user->name,1,strlen($post->user->name))}}</small>
                 </div>   
      @endforeach
      
