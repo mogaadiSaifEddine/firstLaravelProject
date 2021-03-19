@@ -60,7 +60,18 @@ class PostsController extends Controller
             'title' => ['required'],
             'body' =>[ 'required'],
         ]);
+       if ( $request->hasFile('cover_image')) {
+           $fileNameWithExt =$request->file('cover_image')->getClientOriginalName();
+           $fileName=pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+           $ext =$request->file('cover_image')->getClientOriginalExtension();
+           $fileNameToStore= $fileName.'_'.time().'.'.$ext;
+           $path=$request->file('cover_image')->storeAs('public/cover_image',$fileNameToStore);
+       }
+       else{
+           $fileNameToStore='no.jpg';
+       }
         $post = new Post ; 
+        $post->cover_image = $fileNameToStore;
         $post->title =$request->input('title');
         $post->body = $request->input('body') ; 
         $post->user_id= auth()->user()->id;

@@ -4,6 +4,7 @@
 
 <a class="btn btn-outline-light" href="/posts">Go back to Posts</a>
 <h1>{{$post->title}}</h1>
+<img style="width: 70%" src='/storage/cover_image/{{$post->cover_image}}'/>
 <p>{{$post->body}}</p>
 <small>{{$post->created_at}}</small>
 @if (!Auth::guest())
