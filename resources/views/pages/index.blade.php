@@ -19,7 +19,7 @@
 <div class = 'jumbotron text-center'>
       <h1>{{$first}}</h1>
       <p> Welcome </p>
-      <p><a class= 'btn-lg' href="/login" role="button">login</a><a class= 'btn-lg' href="/register" role="button">register</a></p>
+      <p>first app laravel</p>
 </div>
 @endsection    
 

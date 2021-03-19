@@ -64,7 +64,7 @@ class PostsController extends Controller
            $fileNameWithExt =$request->file('cover_image')->getClientOriginalName();
            $fileName=pathinfo($fileNameWithExt,PATHINFO_FILENAME);
            $ext =$request->file('cover_image')->getClientOriginalExtension();
-           $fileNameToStore= $fileName.'_'.time().'.'.$ext;
+           $fileNameToStore= $fileName.'_'.time().$ext;
            $path=$request->file('cover_image')->storeAs('public/cover_image',$fileNameToStore);
        }
        else{
@@ -119,17 +119,32 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-       
+        if ( $request->hasFile('cover_image')) {
+            $fileNameWithExt =$request->file('cover_image')->getClientOriginalName();
+            $fileName=pathinfo($fileNameWithExt,PATHINFO_FILENAME);
+            $ext =$request->file('cover_image')->getClientOriginalExtension();
+            $fileNameToStore= $fileName.'_'.time().$ext;
+            $path=$request->file('cover_image')->storeAs('public/cover_image',$fileNameToStore);
+        }
+        else{
+            $fileNameToStore='no.jpg';
+        }
      $post = Post::find($id);
     
       $msg ='post  '. $post->title;
       $message = $msg ;
+
      if ($request->title != null){
       $msg.=' title updated from('.strtoupper($post->title).' )to ('.strtoupper($request->title ).')';
-      $post->title = $request->input('title');} 
-  
-     if ($request->body != null){
+      $post->title = $request->input('title');}
 
+  if($request->hasFile('cover_image')){
+      
+      $post->cover_image=$fileNameToStore;
+      $msg.='  image upageted';
+  }
+
+     if ($request->body != null){
      $post->body =$request->input('body');
     $msg.='      body updated from (  '.strtoupper($post->body).'  ) to ( '.strtoupper($request->body).')';}
     
