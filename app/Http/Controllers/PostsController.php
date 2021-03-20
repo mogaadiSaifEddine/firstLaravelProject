@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 
@@ -59,7 +59,8 @@ class PostsController extends Controller
         $this->validate($request, [
             'title' => ['required'],
             'body' =>[ 'required'],
-        ]);
+            'cover_image'=>['image']
+        ,]);
        if ( $request->hasFile('cover_image')) {
            $fileNameWithExt =$request->file('cover_image')->getClientOriginalName();
            $fileName=pathinfo($fileNameWithExt,PATHINFO_FILENAME);
@@ -119,6 +120,10 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+         
+            'cover_image'=>['image']
+        ,]);
         if ( $request->hasFile('cover_image')) {
             $fileNameWithExt =$request->file('cover_image')->getClientOriginalName();
             $fileName=pathinfo($fileNameWithExt,PATHINFO_FILENAME);
@@ -173,6 +178,9 @@ class PostsController extends Controller
         if (auth()->user()->id!==$post->user_id){
             return redirect ('/posts')->with('error','SORRY ! You are unautherized to delete this post ');
         }  
+        if ($post->cover_image!='no.jpg'){
+            Storage::delete('public/cover_image/'.$post->cover_image);
+        }
         $post->delete();
         return redirect('/posts' )->with('success' , $title.'  deleted');
         //
